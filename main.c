@@ -110,13 +110,17 @@ int main(void){
     //Aufgabe 3.) CSV-Datei zeilenweise einlesen
     FILE* stocks = fopen("stocks.txt","w");
     int n_csv = sizeof(stocks) / sizeof(stocks[0]); //Für CSV
+    char antwort;
 
-        if(stocks == NULL){
-            printf("\nFehler: Kann Datei nicht öffnen bzw. schreiben.");
-
-        }else
+    printf("Willst Du etwas in eine Datei schreiben: (J)a oder (N)ein ?");
+        if(antwort == "J"){
             schreibeCSV(stocks, n_csv);
-
+            
+        }else if(antwort == "N"){
+            printf("Ok.");
+        
+        }else
+            printf("Bitte nur gültige Werte eingeben!");
 
     
 
