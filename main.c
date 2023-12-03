@@ -49,7 +49,7 @@ void dividendenrendite(float akt_aktienkurs, float akt_dividende){
     printf("Die Dividendenrendite betraegt in Prozent: %.2f", div_in_prozent);
 
 }
-//Aufgabe 3.)  CSV-Datei zeilenweise einlesen mit verschiedenen Datentypen
+//Aufgabe 3.) CSV-Datei zeilenweise einlesen mit verschiedenen Datentypen
 //Vereint mehrere Datentypen in einem
 union data{
 
