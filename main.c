@@ -43,10 +43,37 @@
     }
 
 //Aufgabe 2.) Funktion-Dividendenrendite
+void dividendenrendite(float akt_aktienkurs, float akt_dividende){
+
+    float div_in_prozent = (akt_dividende / akt_aktienkurs) * 100;
+    printf("Die Dividendenrendite betraegt in Prozent: %.2f", div_in_prozent);
+
+}
+//Aufgabe 3.)  CSV-Datei zeilenweise einlesen mit verschiedenen Datentypen
+//Vereint mehrere Datentypen in einem
+union data{
+
+    char isin[20];
+    char name_aktien[20];
+    int aktienkaeufe_verkaeufe[20];
+    int aktienkurs_kauf_verkauf[20];
+    float jahresdividende[20];
+    char kaufdatum_verkaufdatum_aktien[20];
+    char kaeufer_verkaeuefer_aktien[20];
+
+};
+
+void schreibeCSV(FILE* stocks, union data* data){
+    for(int i = 0; i < sizeof(data); i++){
+        fprintf(stocks, "%s, %s, %d, %d, %f, %s, %s", data[i].isin, data[i].name_aktien, 
+            data[i].aktienkaeufe_verkaeufe, data[i].aktienkurs_kauf_verkauf, 
+            data[i].jahresdividende, data[i].kaufdatum_verkaufdatum_aktien, 
+            data[i].kaeufer_verkaeuefer_aktien);    
+    }
+    printf("\nGlückwunsch! Deine Daten wurden in Deine Datei geschrieben.");
 
 
-
-//Aufgabe 3.) CSV-Datei zeilenweise einlesen
+}
 
 
 
@@ -74,11 +101,37 @@ int main(void){
 
     };
 
-    int n = sizeof(Feld) / sizeof(Feld[0]);
+    //Gibt die Größe des Arrays zurück
+    int n = sizeof(Feld) / sizeof(Feld[0]); // Für Feld
 
-
-
+    //Sortierung der im Feld stehenden Elemente
     bubblesort(Feld, n);
+
+    //Aufgabe 3.) CSV-Datei zeilenweise einlesen
+    FILE* stocks = fopen("stocks.txt","w");
+    int n_csv = sizeof(stocks) / sizeof(stocks[0]); //Für CSV
+
+        if(stocks == NULL){
+            printf("\nFehler: Kann Datei nicht öffnen bzw. schreiben.");
+
+        }else
+            schreibeCSV(stocks, n_csv);
+
+
+    
+
+    printf("\nEXTRA:-----------------------------------\n");
+    printf("------Berechnung Dividendenrendite------\n");
+    
+    float akt_aktienkurs, akt_jahresdividende;
+
+    printf("\nBitte gib den Aktienkurs an: ");
+    scanf("%f", &akt_aktienkurs);
+
+    printf("\nBitte gib die Jahresdividende an: ");
+    scanf("%f", &akt_jahresdividende);
+
+    dividendenrendite(akt_aktienkurs, akt_jahresdividende);
 
 
 
