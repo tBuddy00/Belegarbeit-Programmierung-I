@@ -114,10 +114,7 @@ int main(void){
     if(stocks_pfeil == NULL){
         printf("Konnte Datei nicht öffnen.");
         return 0;
-
-
     }
-
 
     int n_csv = sizeof(stocks) / sizeof(stocks[0]); //Für CSV
     char antwort;
@@ -125,17 +122,17 @@ int main(void){
     
 
     printf("Willst Du etwas in eine Datei schreiben: (J)a oder (N)ein?");
-        if(antwort == "J"){
+        if(antwort == 'J'){
             schreibeCSV(stocks, n_csv);
             
-        }else if(antwort == "N"){
+        }else if(antwort == 'N'){
             printf("\nOk.");
 
         }else
             printf("\nBitte nur gültige Werte eingeben!");
 
         printf("\nWillst Du Deine Datei erweitern: (J)a oder (N)ein?");
-            if(erweitern == "J"){
+            if(erweitern == 'J'){
                  FILE* stocks = fopen("stocks.txt","a");
             }else
                 printf("\nOk.");
