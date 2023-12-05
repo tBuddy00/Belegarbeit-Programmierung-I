@@ -118,7 +118,9 @@ int main(void){
         
     }    
 
-    printf("Bitte auswählen: (1) Schreiben in Datei\t(2) nicht schreiben\t(3) Erweitern\t(4) Aktieninformationen auflisten\t(5) EXTRA: Dividendenrendite berechnen\n");
+while(1){
+
+    printf("Bitte auswählen: (1) Schreiben in Datei\t(2) nicht schreiben\t(3) Erweitern\t(4) Aktieninformationen auflisten\t(5) EXTRA: Dividendenrendite berechnen\t(6) Beenden\n");
     scanf("%s", &antwort);
 
     if(antwort == '1'){
@@ -169,13 +171,18 @@ int main(void){
         scanf("%f", &akt_jahresdividende);
 
         dividendenrendite(akt_aktienkurs, akt_jahresdividende);
+
+
+    }else if(antwort == '6'){
+        printf("Beendet.");
+    }
     
-        
-    }else
+    else
 
         printf("\nBitte nur gueltige Werte eingeben!");
 
-    
+}
+
     return 0;
 
 
