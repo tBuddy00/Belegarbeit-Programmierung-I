@@ -110,7 +110,14 @@ int main(void){
     //Aufgabe 3.) CSV-Datei zeilenweise einlesen
     FILE* stocks_pfeil = fopen("stocks.txt","w");
 
-    //Prüfung ob stocks
+    //Prüfung ob stocks geöffnet wurde
+    if(stocks_pfeil == NULL){
+        printf("Konnte Datei nicht öffnen.");
+        return 0;
+
+
+    }
+
 
     int n_csv = sizeof(stocks) / sizeof(stocks[0]); //Für CSV
     char antwort;
