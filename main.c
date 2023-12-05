@@ -6,13 +6,13 @@
 
     struct Aktien {
 
-        char isin[20];
-        char name_aktien[20];
-        int aktienkaeufe_verkaeufe[20];
-        int aktienkurs_kauf_verkauf[20];
-        float jahresdividende[20];
-        char kaufdatum_verkaufdatum_aktien[20];
-        char kaeufer_verkaeuefer_aktien[20];
+        char isin;
+        char name_aktien;
+        int aktienkaeufe_verkaeufe;
+        int aktienkurs_kauf_verkauf;
+        float jahresdividende;
+        char kaufdatum_verkaufdatum_aktien;
+        char kaeufer_verkaeuefer_aktien;
    
     };
 
@@ -53,13 +53,13 @@ void dividendenrendite(float akt_aktienkurs, float akt_dividende){
 //Vereint mehrere Datentypen in einem
 union data{
 
-    char isin[20];
-    char name_aktien[20];
-    int aktienkaeufe_verkaeufe[20];
-    int aktienkurs_kauf_verkauf[20];
-    float jahresdividende[20];
-    char kaufdatum_verkaufdatum_aktien[20];
-    char kaeufer_verkaeuefer_aktien[20];
+    char isin;
+    char name_aktien;
+    int aktienkaeufe_verkaeufe;
+    int aktienkurs_kauf_verkauf;
+    float jahresdividende;
+    char kaufdatum_verkaufdatum_aktien;
+    char kaeufer_verkaeuefer_aktien;
 
 };
 
@@ -108,7 +108,10 @@ int main(void){
     bubblesort(Feld, n);
 
     //Aufgabe 3.) CSV-Datei zeilenweise einlesen
-    FILE* stocks = fopen("stocks.txt","w");
+    FILE* stocks_pfeil = fopen("stocks.txt","w");
+
+    //Prüfung ob stocks
+
     int n_csv = sizeof(stocks) / sizeof(stocks[0]); //Für CSV
     char antwort;
     char erweitern;
