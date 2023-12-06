@@ -83,7 +83,13 @@ void schreibeCSV(FILE* datei, data* data){
 
 
 //Aufgabe 4.) Ermittlung durchschnittliche Stückzahl aller getätigten Käufe
+//gesamtzahl_kaeufe_verkaeufe = n; summe_aus_kaeufe_verkaeufe = Summe aus x1 + x2 +..+ xn;
 
+//NOCH ABFRAGE IMPLEMENTIEREN MIT IF-Anweisung 
+void durchschnStueckzahl(int gesamtzahl_kaeufe_verkaeufe, int summe_aus_kaeufe_verkaeufe){
+    float arithm = (summe_aus_kaeufe_verkaeufe / gesamtzahl_kaeufe_verkaeufe);
+    printf("Das arithmetische Mittel deiner Kaeufe/Verkaeufe betraegt: %.2f", arithm);
+}
 
 
 //Aufgabe 5.) Auflistung Aktien mit größter Jahresdividende
