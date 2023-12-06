@@ -25,7 +25,7 @@
 void dividendenrendite(float akt_aktienkurs, float akt_dividende){
 
     float div_in_prozent = (akt_dividende / akt_aktienkurs) * 100;
-    printf("Die Dividendenrendite betraegt in Prozent: %.2f", div_in_prozent);
+        printf("Die Dividendenrendite betraegt in Prozent: %.2f\n", div_in_prozent);
 
 }
 //Aufgabe 3.) CSV-Datei zeilenweise einlesen mit verschiedenen Datentypen
@@ -75,7 +75,7 @@ void schreibeCSV(FILE* datei, data* data){
             data[i].jahresdividende, data[i].kaufdatum_verkaufdatum_aktien, 
             data[i].kaeufer_verkaeuefer_aktien);    
     }
-    printf("\nGlückwunsch! Deine Daten wurden in Deine Datei geschrieben.");
+    printf("\nGlueckwunsch! Deine Daten wurden in Deine Datei geschrieben.\n");
 
 
 }
@@ -88,7 +88,7 @@ void schreibeCSV(FILE* datei, data* data){
 //NOCH ABFRAGE IMPLEMENTIEREN MIT IF-Anweisung 
 void durchschnStueckzahl(int gesamtzahl_kaeufe_verkaeufe, int summe_aus_kaeufe_verkaeufe){
     float arithm = (summe_aus_kaeufe_verkaeufe / gesamtzahl_kaeufe_verkaeufe);
-    printf("Das arithmetische Mittel deiner Kaeufe/Verkaeufe betraegt: %.2f", arithm);
+    printf("\nDas arithmetische Mittel deiner Kaeufe/Verkaeufe betraegt: %.2f\n", arithm);
 }
 
 
@@ -121,14 +121,14 @@ int main(void){
 
     //Prüfung ob Datei leer
     if(stocks_file == NULL){
-        printf("Konnte Datei nicht öffnen.");
+        printf("\nKonnte Datei nicht öffnen.\n");
         return 0;
         
     }    
 
 while(1){
 
-    printf("Bitte auswählen: (1) Schreiben in Datei\t(2) nicht schreiben\t(3) Erweitern\t(4) Aktieninformationen auflisten\t(5) EXTRA: Dividendenrendite berechnen\t(6) Beenden\n");
+    printf("\n-----------------------------------Bitte auswaehlen-----------------------------------\n\n(1) Schreiben in Datei\t(2) nicht schreiben\t(3) Erweitern\t(4) Aktieninformationen auflisten\t(5) EXTRA: Dividendenrendite berechnen\t(6) Beenden\n");
     scanf(" %c", &antwort); //Das Leerzeichen bei " %c" überspringt Whitespaces
 
     if(antwort == '1'){
@@ -146,31 +146,31 @@ while(1){
         fclose(stocks_file);
 
     }else if(antwort == '4'){
-        printf("------Aktieninformationen------\n");
+        printf("\n------Aktieninformationen------\n");
 
                 
          //Gibt die Größe des Arrays zurück
         int n = sizeof(stocks) / sizeof(stocks[0]); // Für Feld
 
+        //FUNKTIONIERT NOCH NICHT GANZ, GIBT MEHR ALS NÖTIG AUS UND FALSCHE INFORMATIONEN AN DER FALSCHER STELLE
         for(int i = 0; i < n; i++){
 
-        printf("ISIN: %s", stocks[i].isin);
-        printf("Unternehmen: %s", stocks[i].name_aktien); 
-        printf("Anteile im Besitz: %d", stocks[i].aktienkaeufe_verkaeufe);  
-        printf("Aktienkurs: %d", stocks[i].aktienkurs_kauf_verkauf); 
-        printf("Jahresdividende: %f", stocks[i].jahresdividende);
-        printf("Kaufdatum/Verkaufdatum: %s", stocks[i].kaufdatum_verkaufdatum_aktien);
-        printf("Kaeufer/Verkaeufer: %s", stocks[i].kaeufer_verkaeuefer_aktien);
+        printf("\nISIN: %s\n", stocks[i].isin);
+        printf("\nUnternehmen: %s\n", stocks[i].name_aktien); 
+        printf("\nAnteile im Besitz: %d\n", stocks[i].aktienkaeufe_verkaeufe);  
+        printf("\nAktienkurs: %d\n", stocks[i].aktienkurs_kauf_verkauf); 
+        printf("\nJahresdividende: %f\n", stocks[i].jahresdividende);
+        printf("\nKaufdatum/Verkaufdatum: %s\n", stocks[i].kaufdatum_verkaufdatum_aktien);
+        printf("\nKaeufer/Verkaeufer: %s\n", stocks[i].kaeufer_verkaeuefer_aktien);
     
         }
 
-        printf("Sortierte Aktienfolge nach Namen:\n");
+        printf("\n\n------Sortierte Aktienfolge nach Namen------\n");
         bubblesort(stocks, n);
 
 
     }else if(antwort == '5'){
 
-        printf("\nEXTRA:-----------------------------------\n");
         printf("------Berechnung Dividendenrendite------\n");
 
         float akt_aktienkurs, akt_jahresdividende;
