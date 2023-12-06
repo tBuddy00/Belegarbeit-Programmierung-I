@@ -1,6 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include <math.h>
+#include <ctype.h>
 #include <string.h>
 
 
@@ -32,13 +32,13 @@ void dividendenrendite(float akt_aktienkurs, float akt_dividende){
 //Vereint mehrere Datentypen in einem
 typedef union data{
 
-    char isin;
-    char name_aktien;
+    char isin[20];
+    char name_aktien[20];
     int aktienkaeufe_verkaeufe;
     int aktienkurs_kauf_verkauf;
     float jahresdividende;
-    char kaufdatum_verkaufdatum_aktien;
-    char kaeufer_verkaeuefer_aktien;
+    char kaufdatum_verkaufdatum_aktien[20];
+    char kaeufer_verkaeuefer_aktien[20];
 
 }data;
 
@@ -52,7 +52,7 @@ typedef union data{
         for(i = 0; i < n - 1; i++){
             for(j = i + 1; j < n; j++){
                 if(strcmp(stocks[i].name_aktien, stocks[j].name_aktien) > 0){
-                    temp = stocks[i];
+                    temp = stocks[j];
                     stocks[i] = stocks[i];
                     stocks[j] = temp;
 
@@ -65,10 +65,12 @@ typedef union data{
 
     }
 
+//sizeof(data) gibt die größe des gesamten Union zurück
 
 void schreibeCSV(FILE* datei, data* data){
     for(int i = 0; i < sizeof(data); i++){
-        fprintf(datei, "%s, %s, %d, %d, %f, %s, %s", data[i].isin, data[i].name_aktien, 
+        fprintf(datei, "%s, %s, %d, %d, %f, %s, %s\n", 
+            data[i].isin, data[i].name_aktien, 
             data[i].aktienkaeufe_verkaeufe, data[i].aktienkurs_kauf_verkauf, 
             data[i].jahresdividende, data[i].kaufdatum_verkaufdatum_aktien, 
             data[i].kaeufer_verkaeuefer_aktien);    
@@ -94,7 +96,7 @@ void schreibeCSV(FILE* datei, data* data){
 int main(void){
 
 
-    //Bezieht sich auf das Struct Aktien
+    //Bezieht sich auf das union data Aktien
     data stocks[] = {
 
         {"DE000BASF111", "BASF AG", 100, 42, 3.30, "20.10.2023", "Klaus"},
@@ -105,7 +107,7 @@ int main(void){
     };
 
     
-    char antwort = toUpper(antwort);
+    char antwort = toupper(antwort);
 
     
     //Aufgabe 3.) CSV-Datei zeilenweise einlesen
@@ -121,7 +123,7 @@ int main(void){
 while(1){
 
     printf("Bitte auswählen: (1) Schreiben in Datei\t(2) nicht schreiben\t(3) Erweitern\t(4) Aktieninformationen auflisten\t(5) EXTRA: Dividendenrendite berechnen\t(6) Beenden\n");
-    scanf("%s", &antwort);
+    scanf(" %c", &antwort); //Das Leerzeichen bei " %c" überspringt Whitespaces
 
     if(antwort == '1'){
 
@@ -140,10 +142,9 @@ while(1){
     }else if(antwort == '4'){
         printf("------Aktieninformationen------\n");
 
+                
          //Gibt die Größe des Arrays zurück
         int n = sizeof(stocks) / sizeof(stocks[0]); // Für Feld
-
-        bubblesort(stocks, n);
 
         for(int i = 0; i < n; i++){
 
@@ -154,8 +155,12 @@ while(1){
         printf("Jahresdividende: %f", stocks[i].jahresdividende);
         printf("Kaufdatum/Verkaufdatum: %s", stocks[i].kaufdatum_verkaufdatum_aktien);
         printf("Kaeufer/Verkaeufer: %s", stocks[i].kaeufer_verkaeuefer_aktien);
-        
+    
         }
+
+        printf("Sortierte Aktienfolge nach Namen:\n");
+        bubblesort(stocks, n);
+
 
     }else if(antwort == '5'){
 
