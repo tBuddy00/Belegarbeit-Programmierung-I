@@ -3,6 +3,7 @@
 #include <ctype.h>
 #include <string.h>
 
+#define MAX_STOCKS 100
 
     /* struct Aktien {
 
@@ -23,7 +24,6 @@
 
 //Aufgabe 2.) Funktion-Dividendenrendite
 void dividendenrendite(float akt_aktienkurs, float akt_dividende){
-
     float div_in_prozent = (akt_dividende / akt_aktienkurs) * 100;
         printf("Die Dividendenrendite betraegt in Prozent: %.2f\n", div_in_prozent);
 
@@ -41,6 +41,10 @@ typedef union data{
     char kaeufer_verkaeuefer_aktien[20];
 
 }data;
+
+typedef struct {
+    data stocks[MAX_STOCKS] //Maximal 100 Aktien können im Array gespeichert werden
+}StockContainer;
 
 
 //Aufgabe 1
@@ -81,11 +85,9 @@ void schreibeCSV(FILE* datei, data* data){
 }
 
 
-
 //Aufgabe 4.) Ermittlung durchschnittliche Stückzahl aller getätigten Käufe
 //gesamtzahl_kaeufe_verkaeufe = n; summe_aus_kaeufe_verkaeufe = Summe aus x1 + x2 +..+ xn;
-
-//NOCH ABFRAGE IMPLEMENTIEREN MIT IF-Anweisung 
+ 
 void durchschnStueckzahl(int gesamtzahl_kaeufe_verkaeufe, int summe_aus_kaeufe_verkaeufe){
     float arithm = (summe_aus_kaeufe_verkaeufe / gesamtzahl_kaeufe_verkaeufe);
     printf("\nDas arithmetische Mittel deiner Kaeufe/Verkaeufe betraegt: %.2f\n", arithm);
@@ -102,17 +104,16 @@ void durchschnStueckzahl(int gesamtzahl_kaeufe_verkaeufe, int summe_aus_kaeufe_v
 int main(void){
 
 
-    //Bezieht sich auf das union data Aktien
-    data stocks[] = {
-
+    //Bezieht sich auf das union Aktien
+    StockContainer stockContainer[] = {     
+        
         {"DE000BASF111", "BASF AG", 100, 42, 3.30, "20.10.2023", "Klaus"},
         {"DE000BASF111", "BASF AG", -20, 50, 3.30, "03.11.2023", "Klaus"},
         {"US1912161007", "Coca Cola Co.", 50, 44, 3.30, "05.11.2023", "Sonja"},
         {"US0378331005", "Apple Inc.", 10, 163, 0.91, "02.11.2023", "Benno"}
-
+        
+        
     };
-
-    
     char antwort = toupper(antwort);
 
     
@@ -132,8 +133,8 @@ while(1){
     scanf(" %c", &antwort); //Das Leerzeichen bei " %c" überspringt Whitespaces
 
     if(antwort == '1'){
-
-        schreibeCSV(stocks_file, stocks);
+        //FUNKTIONIERT NOCH NICHT GANZ: FEHLERHAFTE WERTE
+        schreibeCSV(stocks_file, stockContainer);
         fclose(stocks_file);
 
     }else if(antwort == '2'){
@@ -142,7 +143,7 @@ while(1){
     }
     else if(antwort == '3'){
         FILE* stocks_file = fopen("stocks.txt","a");
-        schreibeCSV(stocks_file, stocks);
+        schreibeCSV(stocks_file, stockContainer);
         fclose(stocks_file);
 
     }else if(antwort == '4'){
@@ -150,23 +151,23 @@ while(1){
 
                 
          //Gibt die Größe des Arrays zurück
-        int n = sizeof(stocks) / sizeof(stocks[0]); // Für Feld
+        int n = sizeof(stockContainer) / sizeof(stockContainer[0].stocks); // Für Feld
 
         //FUNKTIONIERT NOCH NICHT GANZ, GIBT MEHR ALS NÖTIG AUS UND FALSCHE INFORMATIONEN AN DER FALSCHER STELLE
         for(int i = 0; i < n; i++){
 
-        printf("\nISIN: %s\n", stocks[i].isin);
-        printf("\nUnternehmen: %s\n", stocks[i].name_aktien); 
-        printf("\nAnteile im Besitz: %d\n", stocks[i].aktienkaeufe_verkaeufe);  
-        printf("\nAktienkurs: %d\n", stocks[i].aktienkurs_kauf_verkauf); 
-        printf("\nJahresdividende: %f\n", stocks[i].jahresdividende);
-        printf("\nKaufdatum/Verkaufdatum: %s\n", stocks[i].kaufdatum_verkaufdatum_aktien);
-        printf("\nKaeufer/Verkaeufer: %s\n", stocks[i].kaeufer_verkaeuefer_aktien);
+        printf("\nISIN: %s\n", stockContainer[i].stocks[i].isin);
+        printf("\nUnternehmen: %s\n", stockContainer[i].stocks[i].name_aktien); 
+        printf("\nAnteile im Besitz: %d\n", stockContainer[i].stocks[i].aktienkaeufe_verkaeufe);  
+        printf("\nAktienkurs: %d\n", stockContainer[i].stocks[i].aktienkurs_kauf_verkauf); 
+        printf("\nJahresdividende: %f\n", stockContainer[i].stocks[i].jahresdividende);
+        printf("\nKaufdatum/Verkaufdatum: %s\n", stockContainer[i].stocks[i].kaufdatum_verkaufdatum_aktien);
+        printf("\nKaeufer/Verkaeufer: %s\n", stockContainer[i].stocks[i].kaeufer_verkaeuefer_aktien);
     
         }
 
         printf("\n\n------Sortierte Aktienfolge nach Namen------\n");
-        bubblesort(stocks, n);
+        bubblesort(stockContainer, n);
     
     
     }else if(antwort == '5'){
