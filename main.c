@@ -128,7 +128,7 @@ int main(void){
 
 while(1){
 
-    printf("\n-----------------------------------Bitte auswaehlen-----------------------------------\n\n(1) Schreiben in Datei\t(2) nicht schreiben\t(3) Erweitern\t(4) Aktieninformationen auflisten\t(5) EXTRA: Dividendenrendite berechnen\t(6) Beenden\n");
+    printf("\n-----------------------------------Bitte auswaehlen-----------------------------------\n\n(1) Schreiben in Datei\t(2) nicht schreiben\t(3) Erweitern\t(4) Aktieninformationen auflisten\t(5) Dividendenrendite berechnen\t(6) Durchschnitt Aktienkaeufe/Verkaeufe berechnen\t(7) Beenden\n");
     scanf(" %c", &antwort); //Das Leerzeichen bei " %c" überspringt Whitespaces
 
     if(antwort == '1'){
@@ -167,8 +167,8 @@ while(1){
 
         printf("\n\n------Sortierte Aktienfolge nach Namen------\n");
         bubblesort(stocks, n);
-
-
+    
+    
     }else if(antwort == '5'){
 
         printf("------Berechnung Dividendenrendite------\n");
@@ -185,6 +185,23 @@ while(1){
 
 
     }else if(antwort == '6'){
+
+        int gesamtzahlKaeufeVerkaeufe;
+        int SummeKaeufeVerkaeufe;
+
+        printf("------Hinweis------ \n");
+        printf("Die Anzahl Deiner Gesamtkaeufe/Verkaeufe ist dein 'n'\nDie Summe aus Deinen vorher addierten Kaeufen/Verkaeufen ergibt sich aus: (x1 + x2 + ... + xn)/n");
+        
+        printf("\n\nBitte gib die Summe aus deinen Kaeufen und Verkaeufen an: ");
+        scanf("%d", &SummeKaeufeVerkaeufe);
+        
+        printf("Bitte gib die Anzahl an Kaeufen/Verkaeufen an: ");
+        scanf("%d", &gesamtzahlKaeufeVerkaeufe);
+
+        durchschnStueckzahl(gesamtzahlKaeufeVerkaeufe, SummeKaeufeVerkaeufe);
+        
+    }else if(antwort == '7'){
+
         printf("Beendet.");
     }
     
