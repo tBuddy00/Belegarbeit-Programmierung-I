@@ -93,20 +93,19 @@ void durchschnStueckzahl(int gesamtzahl_kaeufe_verkaeufe, int summe_aus_kaeufe_v
     printf("\nDas arithmetische Mittel deiner Kaeufe/Verkaeufe betraegt: %.2f\n", arithm);
 }
 
-
+/*
 //Aufgabe 5.) Auflistung der drei Aktien mit der größter Jahresdividende
 void groeßte_Jahresdividende(){
-    for(int i = 0; i < data.sizeof(stockContainer.jahresdividende); i++){
+    for(int i = 0; i < data.sizeof(stockContainer); i++){
         if(stockContainer.jahresdividende < 3.10){
-            printf("Das Unternehmen hat eine geringere Jahresdividende: %c ", stockContainer.name_aktien);
+            printf("Das Unternehmen hat eine geringere Jahresdividende: %c -> Jahresdividende: %.2f", stockContainer.name_aktien, stockContainer.jahresdividende);
         }else
             printf("Jahresdividende der drei groeßten Unternehmen: \n", stockContainer.jahresdividende);
 
     }
 
 }
-
-
+*/
 
 
 //Man schreibt void in die Klammern von main, um anzugeben das die Funktion "main" keinen Wert und Argumente akzeptiert
