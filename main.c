@@ -94,8 +94,17 @@ void durchschnStueckzahl(int gesamtzahl_kaeufe_verkaeufe, int summe_aus_kaeufe_v
 }
 
 
-//Aufgabe 5.) Auflistung Aktien mit größter Jahresdividende
+//Aufgabe 5.) Auflistung der drei Aktien mit der größter Jahresdividende
+void groeßte_Jahresdividende(){
+    for(int i = 0; i < data.sizeof(stockContainer.jahresdividende); i++){
+        if(stockContainer.jahresdividende < 3.10){
+            printf("Das Unternehmen hat eine geringere Jahresdividende: %c ", stockContainer.name_aktien);
+        }else
+            printf("Jahresdividende der drei groeßten Unternehmen: \n", stockContainer.jahresdividende);
 
+    }
+
+}
 
 
 
@@ -129,7 +138,7 @@ int main(void){
 
 while(1){
 
-    printf("\n-----------------------------------Bitte auswaehlen-----------------------------------\n\n(1) Schreiben in Datei\t(2) nicht schreiben\t(3) Erweitern\t(4) Aktieninformationen auflisten\t(5) Dividendenrendite berechnen\t(6) Durchschnitt Aktienkaeufe/Verkaeufe berechnen\t(7) Beenden\n");
+    printf("\n-----------------------------------Bitte auswaehlen-----------------------------------\n\n(1) Schreiben in Datei\t(2) nicht schreiben\t(3) Erweitern\t(4) Aktieninformationen auflisten\t(5) Dividendenrendite berechnen\t(6) Durchschnitt Aktienkaeufe/Verkaeufe berechnen\t(7) Ausgabe der groeßten Jahresdividende\t(8) Beenden");
     scanf(" %c", &antwort); //Das Leerzeichen bei " %c" überspringt Whitespaces
 
     if(antwort == '1'){
@@ -201,7 +210,11 @@ while(1){
 
         durchschnStueckzahl(gesamtzahlKaeufeVerkaeufe, SummeKaeufeVerkaeufe);
         
-    }else if(antwort == '7'){
+    else if(antwort == '7'){
+    
+        groeßte_Jahresdividende();
+    
+    }else if(antwort == '8'){
 
         printf("Beendet.");
     }
